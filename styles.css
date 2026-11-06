@@ -75,7 +75,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .eyebrow { margin: 0; display: flex; align-items: center; gap: 10px; color: #596074; font: 500 10px/1.5 var(--mono); letter-spacing: 1.65px; text-transform: uppercase; }
 .eyebrow-line { width: 22px; height: 1px; display: inline-block; background: var(--purple); }
 .hero-copy-block h1 { margin: 23px 0 23px; font-size: clamp(66px, 8.2vw, 112px); font-weight: 800; line-height: .79; letter-spacing: -.092em; }
-.headline-outline { color: transparent; -webkit-text-stroke: 1.6px #1a2030; }
+.headline-outline { color: transparent; -webkit-text-stroke: 1.6px #1a2030; transition: color .2s ease, -webkit-text-stroke-color .2s ease; }
+.headline-outline:hover { color: #246bff; -webkit-text-stroke-color: #246bff; }
 .lime-dot { display: inline-block; color: var(--lime); -webkit-text-stroke: 1.1px var(--ink); }
 .hero-copy { max-width: 410px; margin: 0; color: #2f3441; font-size: 14px; font-weight: 500; line-height: 1.72; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 23px; }
