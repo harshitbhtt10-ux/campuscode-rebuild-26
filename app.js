@@ -2,6 +2,21 @@ const app = document.querySelector("#app");
 const header = document.querySelector("#site-header");
 const toast = document.querySelector("#toast");
 
+app.addEventListener("pointerover", event => {
+  event.target.closest(".builder-step")?.classList.add("is-open");
+});
+app.addEventListener("pointerout", event => {
+  const step = event.target.closest(".builder-step");
+  if (step && !step.contains(event.relatedTarget)) step.classList.remove("is-open");
+});
+app.addEventListener("focusin", event => {
+  event.target.closest(".builder-step")?.classList.add("is-open");
+});
+app.addEventListener("focusout", event => {
+  const step = event.target.closest(".builder-step");
+  if (step && !step.contains(event.relatedTarget)) step.classList.remove("is-open");
+});
+
 const events = [
   { id: "rebuild", name: "ReBuild ’26", category: "Frontend only", date: "Nov 6 – Nov 7, 2026", format: "Individual", accent: "lime", description: "Recreate it faithfully on Friday and rebuild it beautifully on Saturday. The challenge is to deliver four pages: Landing, Login, Register, and Student Dashboard." },
   { id: "mini-hack", name: "CampusCode Mini Hack", category: "Open track", date: "Nov 20 – Nov 21, 2026", format: "Teams of 2–4", accent: "violet", description: "A sample open-track event for small teams to explore a campus problem and turn an idea into a working prototype." },
