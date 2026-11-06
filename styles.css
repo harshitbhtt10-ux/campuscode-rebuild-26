@@ -93,10 +93,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .display-platform { position: absolute; left: 13%; width: 76%; transform: rotateX(66deg) rotateZ(-8deg); border-radius: 50%; transform-style: preserve-3d; }
 .platform-lower { bottom: 12%; height: 37%; border: 1px solid #a89cff; background: linear-gradient(170deg, #fff 3%, #f6f4ff 37%, #d9d1ff 65%, #aea1ff 89%, #fff 100%); box-shadow: 0 24px 28px rgba(98, 79, 203, .22), 0 8px 0 #b9afff, 0 12px 1px #8e7df0; }
 .platform-upper { bottom: 22%; left: 17%; width: 68%; height: 28%; z-index: 1; border: 2px solid rgba(222, 255, 113, .98); background: linear-gradient(170deg, #fff 0%, #fafaff 56%, #ded9ff 100%); box-shadow: 0 0 13px rgba(197, 240, 68, .6), 0 10px 0 rgba(161, 146, 241, .72), 0 18px 20px rgba(91, 75, 187, .19); }
-.large-brand-mark { position: absolute; top: 34%; left: 35%; z-index: 2; height: 39%; display: flex; align-items: flex-end; gap: 13px; transform: rotateZ(-8deg) rotateX(3deg); transform-style: preserve-3d; }
+.large-brand-mark { position: absolute; top: 24%; left: 35%; z-index: 2; height: 39%; display: flex; align-items: flex-end; gap: 13px; transform-origin: 50% 75%; transform-style: preserve-3d; animation: hero-stage-spin 10s linear infinite; filter: drop-shadow(0 8px 8px rgba(55, 44, 126, .18)); }
 .large-brand-mark i { width: clamp(27px, 4vw, 52px); height: 93%; display: block; border: 1px solid rgba(255,255,255,.54); border-radius: 12px 12px 7px 7px; background: linear-gradient(100deg, #05060a 0%, #171923 40%, #343746 100%); box-shadow: 14px 12px 16px rgba(12, 12, 20, .25), inset 2px 0 4px rgba(255,255,255,.3); transform: skew(-20deg) translateZ(42px); }
 .large-brand-mark i:nth-child(2) { height: 100%; background: linear-gradient(100deg, #553de0 0%, #775af7 50%, #ad99ff 100%); box-shadow: 13px 12px 20px rgba(93, 64, 223, .32), inset 2px 0 4px rgba(255,255,255,.4); }
 .large-brand-mark i:nth-child(3) { height: 91%; background: linear-gradient(100deg, #91d719 0%, #b1ec31 55%, #dbff76 100%); box-shadow: 13px 12px 20px rgba(146, 206, 29, .26), inset 2px 0 4px rgba(255,255,255,.42); }
+@keyframes hero-stage-spin { from { transform: rotateZ(-8deg) rotateX(3deg) rotateY(0deg); } to { transform: rotateZ(-8deg) rotateX(3deg) rotateY(360deg); } }
 .floating-shape { position: absolute; z-index: 1; }
 .glass-sphere { top: 31%; left: 4%; width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.85); border-radius: 50%; background: radial-gradient(circle at 31% 27%, #fff 0 5%, #dfd6ff 14%, #aa98ff 44%, #8a72f0 76%, #d9d1ff 100%); box-shadow: inset -8px -10px 16px rgba(69, 49, 167, .3), 0 13px 21px rgba(102, 80, 216, .24); }
 .cube { width: 51px; height: 51px; border: 1px solid rgba(255,255,255,.8); border-radius: 10px; background: linear-gradient(135deg, rgba(222,255,130,.95), rgba(165,231,42,.9) 51%, rgba(119,194,19,.85)); box-shadow: 12px 14px 20px rgba(113, 155, 42, .19), inset 9px 3px 13px rgba(255,255,255,.45); transform: rotate(30deg) skew(-7deg,-7deg); }
@@ -338,7 +339,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .glass-sphere { top: 31%; left: 1%; width: 37px; height: 37px; }
   .cube-one { top: 11%; right: 2%; width: 42px; height: 42px; }
   .cube-two { left: 7%; }
-  .large-brand-mark { top: 35%; left: 35%; height: 35%; gap: 9px; }
+  .large-brand-mark { top: 25%; left: 35%; height: 35%; gap: 9px; }
   .large-brand-mark i { width: clamp(23px, 7vw, 35px); border-radius: 8px 8px 5px 5px; }
   .platform-lower { bottom: 15%; height: 34%; }
   .platform-upper { bottom: 24%; height: 27%; }
