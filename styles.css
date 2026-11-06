@@ -711,6 +711,53 @@ body[data-route="dashboard"] .main-nav { display: none; }
   -webkit-text-stroke: 1px #8b8b84;
 }
 
+.auth-story h1 .arena-trigger {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.arena-popover {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 8px;
+  z-index: 8;
+  width: 230px;
+  padding: 15px 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: 0 12px 30px rgba(17, 17, 17, .12);
+  color: var(--ink);
+  font: 400 10px/1.4 var(--mono);
+  letter-spacing: 0;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-text-stroke: 0;
+  transform: translateY(-5px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+.arena-popover .popover-kicker {
+  color: #777771;
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+
+.arena-popover strong {
+  font: 800 17px/1.1 Inter, "Segoe UI", sans-serif;
+  letter-spacing: -.04em;
+}
+
+.arena-trigger:hover .arena-popover,
+.arena-trigger:focus-visible .arena-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .auth-story-copy {
   max-width: 470px;
   margin: 28px 0 26px;
