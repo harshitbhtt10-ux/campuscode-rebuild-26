@@ -231,6 +231,15 @@ function dashboardPage() {
   const firstName = escapeHTML(signedInName.trim().split(/\s+/)[0] || "Builder");
   const joined = registeredEvents();
   const selectedView = dashboardView();
+  const buildSteps = [
+    ["Discover", "Find a challenge", "Example: Open ReBuild ’26, read the frontend-only rules, and check the deadline."],
+    ["Team up", "Find your people", "Example: Join a CampusCode Mini Hack team of 2–4 students."],
+    ["Build", "Make it work", "Example: Create the four required views and connect their navigation."],
+    ["Ship", "Share your result", "Example: Publish the preview and share its live link with your submission."]
+  ];
+  const buildPath = buildSteps.map(([title, subtitle, example], index) =>
+    `<button class="builder-step" type="button" aria-describedby="builder-example-${index}"><span>0${index + 1} / 04</span><strong>${title}</strong><small>${subtitle}</small><span class="builder-tooltip" id="builder-example-${index}" role="tooltip"><b>EXAMPLE</b>${example}</span></button>`
+  ).join("");
   return `
     <section class="dashboard page-enter">
       <aside class="dashboard-sidebar" aria-label="Student dashboard navigation">
@@ -249,6 +258,11 @@ function dashboardPage() {
         <section class="feature-card">
           <div class="feature-content"><span class="feature-kicker"><span></span>UP NEXT · INDIVIDUAL</span><h2>ReBuild <em>’26</em></h2><p>Make something useful, show us how it works, and ship it this weekend.</p><div class="feature-meta">${icon("calendar")} Nov 6 – Nov 7, 2026 <span class="meta-divider"></span><span class="meta-pill">Frontend only</span></div><button class="button feature-button" type="button" data-message="ReBuild ’26 is open for registration below.">View event ${icon("arrow")}</button></div>
           <div class="feature-art dashboard-stage" aria-hidden="true"><div class="feature-ring"></div><div class="feature-plinth"></div><div class="feature-mark"><i></i><i></i><i></i></div><div class="feature-spark"></div></div>
+        </section>
+
+        <section class="builder-path" aria-label="Four steps to take part">
+          <div class="builder-path-heading"><h2>Your build path</h2><span>Hover a step for an example ↗</span></div>
+          <div class="builder-path-grid">${buildPath}</div>
         </section>
 
         <div class="section-heading"><div><span class="section-index">01</span><h2>In your orbit</h2></div><div class="view-switch"><a class="${selectedView === "my-events" ? "active" : ""}" href="#dashboard?view=my-events">My events <span>${joined.length}</span></a><a class="${selectedView === "events" ? "active" : ""}" href="#dashboard?view=events">Explore all ${icon("arrow")}</a></div></div>
