@@ -1,6 +1,6 @@
 # CampusCode ReBuild ’26
 
-A responsive, frontend-only CampusCode preview based on the supplied four-screen reference. The page links stay within the four requested views: Home, Login, Register, and Student Dashboard.
+A responsive, frontend-only CampusCode preview using the live site's grid, oversized type, and restrained brand colours. The page links stay within the four requested views: Home, Login, Register, and Student Dashboard.
 
 ## Project layout
 
@@ -8,7 +8,7 @@ A responsive, frontend-only CampusCode preview based on the supplied four-screen
 CampusCodeRound1/
 ├── index.html       # Shared shell and SVG icon set
 ├── app.js           # Four views, navigation, and demo interactions
-├── styles.css       # Responsive layout and CSS depth effects
+├── styles.css       # Shared visual system and responsive layouts
 ├── .gitignore
 └── README.md
 ```
@@ -25,10 +25,10 @@ Then open <http://localhost:4173>.
 
 ## The four views
 
-- **Home** — CampusCode introduction, dimensional mark, and event call to action.
-- **Login** — Accessible sign-in form with a local demo flow.
-- **Register** — Account form with password confirmation and a visual demo verification code (`7GK4P`).
-- **Student Dashboard** — Sample ReBuild ’26 event, event lists, registration toggles, and activity counts.
+- **Home** — Editorial landing page, a dimensional CampusCode stage, how-it-works steps, event cards, and community call to action.
+- **Login** — Split story and sign-in form with a local demo flow.
+- **Register** — Split story and account form with password confirmation and a visual demo verification code (`7GK4P`).
+- **Student Dashboard** — Rotating 3D mark aligned over its stage, sample ReBuild ’26 event, event lists, registration toggles, and activity counts.
 
 Form data and event selections stay in the current browser tab's session storage. There is no backend, real authentication, or persistent account storage.
 
