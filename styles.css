@@ -62,6 +62,21 @@ body::after {
   pointer-events: none;
 }
 
+body[data-route="dashboard"]::after {
+  top: 18vh;
+  right: -12rem;
+  background:
+    radial-gradient(circle at 32% 32%, rgba(118, 101, 255, .16), transparent 58%),
+    radial-gradient(circle at 72% 72%, rgba(168, 230, 46, .12), transparent 57%),
+    radial-gradient(circle at 58% 18%, rgba(36, 107, 255, .08), transparent 60%);
+  animation: dashboard-glow 20s ease-in-out infinite alternate;
+}
+
+@keyframes dashboard-glow {
+  from { transform: translate3d(0, 0, 0) scale(.98); }
+  to { transform: translate3d(-18px, 12px, 0) scale(1.03); }
+}
+
 button,
 input,
 select { font: inherit; }
@@ -1410,6 +1425,7 @@ body[data-route="dashboard"] .main-nav { display: none; }
   top: calc(100% + 7px);
   left: 0;
   z-index: 12;
+  display: block;
   width: min(265px, calc(100vw - 56px));
   padding: 13px 14px;
   border: 1px solid var(--line);
@@ -1425,7 +1441,8 @@ body[data-route="dashboard"] .main-nav { display: none; }
 }
 .builder-tooltip b { display: block; margin-bottom: 5px; color: var(--step-accent); font-size: 8px; letter-spacing: .1em; }
 .builder-step:hover .builder-tooltip,
-.builder-step:focus-visible .builder-tooltip { opacity: 1; visibility: visible; transform: translateY(0); }
+.builder-step:focus-visible .builder-tooltip,
+.builder-step.is-open .builder-tooltip { opacity: 1; visibility: visible; transform: translateY(0); }
 
 @keyframes mark-turn {
   from { transform: translateX(-50%) rotateY(0deg); }
