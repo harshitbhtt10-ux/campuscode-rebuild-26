@@ -141,6 +141,9 @@ function authBackdrop(kind) {
   const description = isLogin
     ? "Sign in to continue building, collaborating and competing with the CampusCode community."
     : "Create your student profile and find your place in the CampusCode community.";
+  const arenaWord = isLogin
+    ? "<span class='arena-trigger' tabindex='0' aria-describedby='arena-hackathon-popover'>ARENA.<span class='arena-popover' id='arena-hackathon-popover' role='tooltip'><span class='popover-kicker'>NEXT HACKATHON</span><strong>ReBuild ’26</strong><span>Frontend only · Individual</span><span>November 6–7, 2026</span></span></span>"
+    : "ARENA.";
   const cards = (isLogin ? ["BUILD", "COMPETE", "SHIP"] : ["IDENTITY", "TEAM", "ARENA"])
     .map((label, index) =>
       "<article class='auth-step'>" +
@@ -152,7 +155,7 @@ function authBackdrop(kind) {
   return "<aside class='auth-story'>" +
     "<p class='eyebrow'><span class='status-dot'></span>CampusCode / " + sectionName + "</p>" +
     "<div class='auth-story-index'><span>" + (isLogin ? "Access" : "Create") + "</span><span>0" + (isLogin ? "1" : "2") + " / 02</span></div>" +
-    "<h1>" + firstWord + "<br>THE<br><span>ARENA.</span></h1>" +
+    "<h1>" + firstWord + "<br>THE<br><span>" + arenaWord + "</span></h1>" +
     "<p class='auth-story-copy'>" + description + "</p>" +
     "<div class='auth-steps'>" + cards + "</div>" +
     "<p class='auth-story-footer'><span class='status-dot'></span>" + (isLogin ? "Secure access" : "Student innovation network") + "<span>2026</span></p>" +
