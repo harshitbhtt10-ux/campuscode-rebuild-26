@@ -24,15 +24,19 @@ function dashboardView() {
 
 function navigation(route) {
   if (route === "dashboard") {
-    return `
-      <a href="#home">Home</a>
-      <a href="#dashboard?view=events">Events</a>
-      <a href="#dashboard?view=my-events">My events</a>`;
+    return "<a href='#dashboard'>Dashboard</a>" +
+      "<a href='#dashboard?view=my-events'>My events</a>" +
+      "<a href='#dashboard?view=events'>Events</a>";
   }
+
   if (route === "login" || route === "register") {
-    return `<a href="#home">Home</a><a href="#dashboard?view=events">Events</a><a href="#about">About</a>`;
+    return "<a href='#home'>← Back to home</a>";
   }
-  return `<a class="is-current" href="#home">Home</a><a href="#dashboard?view=events">Events</a><a href="#dashboard?view=my-events">HackMate</a><a href="#about">About</a>`;
+
+  return "<a href='#about'>About</a>" +
+    "<a href='#how'>How it works</a>" +
+    "<a href='#hackathons'>Hackathons</a>" +
+    "<a href='#community'>Community</a>";
 }
 
 function headerMarkup(route) {
@@ -46,56 +50,113 @@ function headerMarkup(route) {
       <div class="header-actions">
         ${route === "dashboard"
           ? `<button class="icon-button notification-button" type="button" aria-label="Notifications">${icon("bell")}</button><div class="user-chip"><span class="avatar">HB</span><span>${escapeHTML(sessionStorage.getItem("campuscode-name") || "Harshit Bhatt")}</span><span class="chevron">⌄</span></div>`
-          : `<a class="header-login ${route === "login" ? "is-current" : ""}" href="#login">Login</a><a class="button button-small" href="#register">Register</a>`}
+          : `<a class="header-login ${route === "login" ? "is-current" : ""}" href="#login">Login</a><a class="button button-small" href="#register">Join CampusCode ↗</a>`}
       </div>
     </div>`;
 }
 
 function homePage() {
-  return `
-    <section class="landing page-enter">
-      <div class="hero-copy-block">
-        <p class="eyebrow"><span class="eyebrow-line"></span>The digital home for student innovation</p>
-        <h1>BUILD.<br /><span class="headline-outline">COMPETE.</span><br />SHIP<span class="lime-dot">.</span></h1>
-        <p class="hero-copy">An AI-powered hackathon platform for students to discover, participate, collaborate and ship ideas.</p>
-        <div class="hero-actions">
-          <a class="button" href="#dashboard?view=events">Explore events ${icon("arrow")}</a>
-          <a class="button button-light" href="#about">How it works</a>
-        </div>
-        <div class="hero-proof"><span class="proof-avatars"><i>R</i><i>A</i><i>K</i></span><span>Made for the next generation of builders</span></div>
-      </div>
+  const steps = [
+    { number: "01", title: "Discover", copy: "Find a challenge that makes you want to build." },
+    { number: "02", title: "Team up", copy: "Meet people who bring a different point of view." },
+    { number: "03", title: "Build", copy: "Turn a good idea into something people can use." },
+    { number: "04", title: "Ship", copy: "Share your work with the people who can help it grow." }
+  ];
 
-      <div class="hero-art" aria-label="Three dimensional CampusCode mark on a glowing display plinth" role="img">
-        <div class="hero-halo halo-back"></div><div class="hero-halo halo-front"></div>
-        <div class="floating-shape glass-sphere"></div>
-        <div class="floating-shape cube cube-one"><i></i></div>
-        <div class="floating-shape cube cube-two"><i></i></div>
-        <div class="platform-shadow"></div>
-        <div class="display-platform platform-upper"></div>
-        <div class="display-platform platform-lower"></div>
-        <div class="large-brand-mark" aria-hidden="true"><i></i><i></i><i></i></div>
-        <span class="art-caption"><span class="caption-dot"></span> A place to make it real</span>
-      </div>
+  const stepCards = steps.map(step =>
+    "<article class='process-card'>" +
+      "<span class='process-number'>" + step.number + "</span>" +
+      "<h3>" + step.title + "</h3>" +
+      "<p>" + step.copy + "</p>" +
+      "<span class='process-arrow' aria-hidden='true'>↗</span>" +
+    "</article>"
+  ).join("");
 
-      <div class="values-strip" aria-label="CampusCode values"><span>IDEAS</span><b>•</b><span>PEOPLE</span><b>•</b><span>PRODUCTS</span><b>•</b><span>INNOVATION</span><b>•</b><span>COMMUNITY</span></div>
-      <section class="how-section" id="about">
-        <div><p class="eyebrow">A little less scrolling. A lot more making.</p><h2>Find your next<br /><span>big idea.</span></h2></div>
-        <p>Meet builders, find an event that fits, and give your ideas room to grow. CampusCode keeps your next challenge in one place.</p>
-        <a class="text-link" href="#dashboard?view=events">See what’s coming ${icon("arrow")}</a>
-      </section>
-      <footer class="landing-footer"><a class="brand brand-footer" href="#home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-name">CAMPUSCODE</span></a><span>Build something worth sharing.</span><a href="#login">Student sign in</a></footer>
-    </section>`;
+  const eventCards = events.map((event, index) =>
+    "<article class='home-event-card event-" + escapeHTML(event.accent) + "'>" +
+      "<p class='eyebrow'>0" + (index + 1) + " / " + escapeHTML(event.category) + "</p>" +
+      "<h3>" + escapeHTML(event.name) + "</h3>" +
+      "<p>" + escapeHTML(event.date) + "</p>" +
+      "<a href='#dashboard?view=events' aria-label='View " + escapeHTML(event.name) + "'>↗</a>" +
+    "</article>"
+  ).join("");
+
+  return [
+    "<section class='landing page-enter'>",
+      "<section class='home-hero' id='home'>",
+        "<div class='hero-meta'>",
+          "<p class='eyebrow'><span class='status-dot'></span>The digital home for student innovation</p>",
+          "<span class='hero-place'>Chennai · India</span>",
+        "</div>",
+        "<p class='hero-index'>CampusCode / 001</p>",
+        "<div class='hero-copy-block'>",
+          "<h1>BUILD<br><span class='headline-outline'>COMPETE</span><br>SHIP<span class='lime-dot'>.</span></h1>",
+          "<p class='hero-copy'>A digital arena for students who don't just have ideas. They build them.</p>",
+          "<div class='hero-actions'>",
+            "<a class='button' href='#dashboard?view=events'>Explore hackathons <span aria-hidden='true'>↗</span></a>",
+            "<a class='text-link' href='#how'>See how it works <span aria-hidden='true'>↘</span></a>",
+          "</div>",
+        "</div>",
+        "<div class='feature-art home-stage' aria-hidden='true'><div class='feature-ring'></div><div class='feature-plinth'></div><div class='feature-mark'><i></i><i></i><i></i></div><div class='feature-spark'></div></div>",
+        "<p class='scroll-cue'><span>Scroll to explore</span><span>01 / 05</span></p>",
+      "</section>",
+      "<div class='values-strip' aria-label='CampusCode values'>",
+        "<span>IDEAS</span><b>✦</b><span>PEOPLE</span><b>✦</b><span>PRODUCTS</span><b>✦</b><span>INNOVATION</span><b>✦</b><span>COMMUNITY</span>",
+      "</div>",
+      "<section class='home-section about-section' id='about'>",
+        "<div class='section-label'><span>01</span><span>What is CampusCode?</span></div>",
+        "<div class='about-copy'><h2>WHERE<br>STUDENTS<br><span>BUILD.</span></h2>",
+          "<p>CampusCode brings students, teams, organizers and hackathons into one connected ecosystem.</p></div>",
+        "<div class='about-mark' aria-hidden='true'><span class='brand-mark'><i></i><i></i><i></i></span><span>Ideas need builders.</span></div>",
+      "</section>",
+      "<section class='home-section process-section' id='how'>",
+        "<div class='section-label'><span>03</span><span>How it works</span></div>",
+        "<div class='section-heading'><h2>FROM IDEA<br>TO <span>IMPACT.</span></h2><p>One place to find your next challenge and get the work out into the world.</p></div>",
+        "<div class='process-grid'>" + stepCards + "</div>",
+      "</section>",
+      "<section class='home-section hackathon-section' id='hackathons'>",
+        "<div class='section-label'><span>04</span><span>Enter the arena</span></div>",
+        "<div class='section-heading'><h2>MAKE SOMETHING<br><span>MATTER.</span></h2>",
+          "<a class='text-link' href='#dashboard?view=events'>View all events <span aria-hidden='true'>↗</span></a></div>",
+        "<div class='home-event-grid'>" + eventCards + "</div>",
+      "</section>",
+      "<section class='home-section community-section' id='community'>",
+        "<div class='community-label'><span>The network</span><span>05 — The mission</span></div>",
+        "<h2>GREAT IDEAS<br>NEED <span>BUILDERS.</span></h2>",
+        "<div class='community-copy'><p>Your university is full of people with ideas. CampusCode gives those ideas somewhere to go.</p>",
+          "<a class='button' href='#register'>Join CampusCode <span aria-hidden='true'>↗</span></a></div>",
+      "</section>",
+      "<footer class='landing-footer'>",
+        "<a class='brand brand-footer' href='#home'><span class='brand-mark' aria-hidden='true'><i></i><i></i><i></i></span><span class='brand-name'>CAMPUSCODE</span></a>",
+        "<span>The student hackathon arena.</span><a href='#login'>Student sign in</a>",
+      "</footer>",
+    "</section>"
+  ].join("");
 }
 
 function authBackdrop(kind) {
-  return `
-    <div class="auth-scene ${kind}-scene" aria-hidden="true">
-      <div class="scene-loop loop-a"></div><div class="scene-loop loop-b"></div>
-      <div class="scene-cube scene-cube-a"><i></i></div><div class="scene-cube scene-cube-b"><i></i></div>
-      <div class="scene-orb scene-orb-a"></div><div class="scene-orb scene-orb-b"></div>
-      <div class="scene-curve curve-a"></div><div class="scene-curve curve-b"></div>
-      <span class="scene-note">${kind === "login" ? "GOOD TO HAVE YOU BACK" : "YOUR NEXT CHAPTER STARTS HERE"}</span>
-    </div>`;
+  const isLogin = kind === "login";
+  const sectionName = isLogin ? "Authentication" : "Registration";
+  const firstWord = isLogin ? "ENTER" : "JOIN";
+  const description = isLogin
+    ? "Sign in to continue building, collaborating and competing with the CampusCode community."
+    : "Create your student profile and find your place in the CampusCode community.";
+  const cards = (isLogin ? ["BUILD", "COMPETE", "SHIP"] : ["IDENTITY", "TEAM", "ARENA"])
+    .map((label, index) =>
+      "<article class='auth-step'>" +
+        "<span>0" + (index + 1) + "</span>" +
+        "<strong>" + label + "</strong>" +
+      "</article>"
+    ).join("");
+
+  return "<aside class='auth-story'>" +
+    "<p class='eyebrow'><span class='status-dot'></span>CampusCode / " + sectionName + "</p>" +
+    "<div class='auth-story-index'><span>" + (isLogin ? "Access" : "Create") + "</span><span>0" + (isLogin ? "1" : "2") + " / 02</span></div>" +
+    "<h1>" + firstWord + "<br>THE<br><span>ARENA.</span></h1>" +
+    "<p class='auth-story-copy'>" + description + "</p>" +
+    "<div class='auth-steps'>" + cards + "</div>" +
+    "<p class='auth-story-footer'><span class='status-dot'></span>" + (isLogin ? "Secure access" : "Student innovation network") + "<span>2026</span></p>" +
+  "</aside>";
 }
 
 function loginPage() {
@@ -103,7 +164,7 @@ function loginPage() {
     <section class="auth-layout page-enter">
       ${authBackdrop("login")}
       <div class="auth-card">
-        <div class="auth-heading"><span class="auth-kicker">STUDENT PORTAL</span><h1>Welcome back.</h1><p>Sign in to pick up where you left off.</p></div>
+        <div class="auth-heading"><span class="auth-kicker">STUDENT PORTAL</span><h1>LOGIN</h1><p>Access your CampusCode account.</p></div>
         <form id="login-form" class="auth-form">
           <label class="field-label" for="login-email">Email address</label>
           <div class="input-wrap">${icon("mail")}<input id="login-email" name="email" type="email" autocomplete="email" placeholder="you@college.edu" required /></div>
@@ -124,7 +185,7 @@ function registerPage() {
     <section class="auth-layout register-layout page-enter">
       ${authBackdrop("register")}
       <div class="auth-card register-card">
-        <div class="auth-heading"><span class="auth-kicker">JOIN THE COMMUNITY</span><h1>Make it official.</h1><p>Create your CampusCode account.</p></div>
+        <div class="auth-heading"><span class="auth-kicker">JOIN THE COMMUNITY</span><h1>REGISTER</h1><p>Create your CampusCode account.</p></div>
         <form id="register-form" class="auth-form">
           <label class="field-label" for="full-name">Full name</label>
           <div class="input-wrap">${icon("users")}<input id="full-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required minlength="2" /></div>
@@ -183,7 +244,7 @@ function dashboardPage() {
         <div class="welcome-row"><div><p class="eyebrow">YOUR BUILDER SPACE</p><h1>Welcome back, <span>${firstName}.</span> <i class="wave">✦</i></h1><p class="welcome-subtitle">A new idea could be just one event away.</p></div><button class="button button-small explore-button" type="button" data-route="events">Explore events ${icon("arrow")}</button></div>
         <section class="feature-card">
           <div class="feature-content"><span class="feature-kicker"><span></span>UP NEXT · INDIVIDUAL</span><h2>ReBuild <em>’26</em></h2><p>Make something useful, show us how it works, and ship it this weekend.</p><div class="feature-meta">${icon("calendar")} Nov 6 – Nov 7, 2026 <span class="meta-divider"></span><span class="meta-pill">Frontend only</span></div><button class="button feature-button" type="button" data-message="ReBuild ’26 is open for registration below.">View event ${icon("arrow")}</button></div>
-          <div class="feature-art" aria-hidden="true"><div class="feature-ring"></div><div class="feature-plinth"></div><div class="feature-mark"><i></i><i></i><i></i></div><div class="feature-spark"></div></div>
+          <div class="feature-art dashboard-stage" aria-hidden="true"><div class="feature-ring"></div><div class="feature-plinth"></div><div class="feature-mark"><i></i><i></i><i></i></div><div class="feature-spark"></div></div>
         </section>
 
         <div class="section-heading"><div><span class="section-index">01</span><h2>In your orbit</h2></div><div class="view-switch"><a class="${selectedView === "my-events" ? "active" : ""}" href="#dashboard?view=my-events">My events <span>${joined.length}</span></a><a class="${selectedView === "events" ? "active" : ""}" href="#dashboard?view=events">Explore all ${icon("arrow")}</a></div></div>
@@ -296,5 +357,18 @@ app.addEventListener("input", event => {
   }
 });
 
-window.addEventListener("hashchange", render);
+window.addEventListener("hashchange", () => {
+  const sectionName = location.hash.slice(1).split(/[/?]/)[0];
+  const isHomeSection = ["about", "how", "hackathons", "community"].includes(sectionName);
+
+  if (isHomeSection && currentRoute() === "home" && document.getElementById(sectionName)) {
+    document.getElementById(sectionName).scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  render();
+  if (isHomeSection && currentRoute() === "home") {
+    requestAnimationFrame(() => document.getElementById(sectionName)?.scrollIntoView({ behavior: "smooth" }));
+  }
+});
 render();
