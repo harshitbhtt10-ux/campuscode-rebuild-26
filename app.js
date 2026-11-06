@@ -3,9 +3,9 @@ const header = document.querySelector("#site-header");
 const toast = document.querySelector("#toast");
 
 const events = [
-  { id: "rebuild", name: "ReBuild ’26", category: "Frontend only", date: "Nov 6 – Nov 7, 2026", format: "Individual", accent: "lime" },
-  { id: "mini-hack", name: "CampusCode Mini Hack", category: "Open track", date: "Nov 20 – Nov 21, 2026", format: "Teams of 2–4", accent: "violet" },
-  { id: "design-sprint", name: "Design to Launch", category: "Product design", date: "Dec 4 – Dec 5, 2026", format: "Teams of 2", accent: "blue" },
+  { id: "rebuild", name: "ReBuild ’26", category: "Frontend only", date: "Nov 6 – Nov 7, 2026", format: "Individual", accent: "lime", description: "Recreate it faithfully on Friday and rebuild it beautifully on Saturday. The challenge is to deliver four pages: Landing, Login, Register, and Student Dashboard." },
+  { id: "mini-hack", name: "CampusCode Mini Hack", category: "Open track", date: "Nov 20 – Nov 21, 2026", format: "Teams of 2–4", accent: "violet", description: "A sample open-track event for small teams to explore a campus problem and turn an idea into a working prototype." },
+  { id: "design-sprint", name: "Design to Launch", category: "Product design", date: "Dec 4 – Dec 5, 2026", format: "Teams of 2", accent: "blue", description: "A sample product design sprint focused on shaping an idea into a clear, useful experience." },
 ];
 
 const icon = (name, className = "") => `<svg class="icon ${className}" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
@@ -218,10 +218,11 @@ function registeredEvents() {
 
 function eventCard(event, registered) {
   return `
-    <article class="event-card event-${event.accent}">
+    <article class="event-card event-${event.accent}" tabindex="0" aria-describedby="details-${event.id}">
       <div class="event-logo"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span></div>
       <div class="event-info"><div class="event-title-row"><h3>${event.name}</h3><button class="icon-button more-button" type="button" aria-label="More about ${event.name}" data-message="You’re viewing the ${event.name} preview.">${icon("more")}</button></div><p class="event-date">${icon("calendar")} ${event.date}</p><span class="event-tag">${event.format}<b>•</b>${event.category}</span></div>
       <button class="event-action ${registered ? "is-registered" : ""}" type="button" data-event-id="${event.id}">${registered ? `${icon("check")} Registered` : "Register"}</button>
+      <div class="event-detail-panel" id="details-${event.id}" role="tooltip"><span class="event-detail-kicker">EVENT BRIEF <b>${event.category}</b></span><strong>${event.name}</strong><p>${event.description}</p><div class="event-detail-meta"><span><small>DATE</small>${event.date}</span><span><small>FORMAT</small>${event.format}</span><span><small>STATUS</small>${registered ? "Registered" : "Registration open"}</span></div></div>
     </article>`;
 }
 
